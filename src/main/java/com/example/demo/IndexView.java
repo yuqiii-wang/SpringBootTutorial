@@ -11,6 +11,11 @@ public class IndexView {
         return "index";
     }
 
+    @RequestMapping(value = "/index.html")
+    public String indexHtml() {
+        return "index";
+    }
+
     @RequestMapping(value = "/")
     public String empty() {
         return "index";
