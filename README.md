@@ -4,6 +4,7 @@ An easy to follow spring boot tutorial, inclusive of major fullstack topics, inc
 1. Frontend, JS, CSS, HTML
 2. Database (MySql) CRUD
 3. Backend Control
+4. REST
 
 Tested on Ubuntu-18.
 
@@ -39,15 +40,6 @@ EXIT
 P.S. After the configuration of MySql access privilege, you might want to login
 MySql by `mysql -h localhost -u root -p` followed by typing the previously 
 defined password (here `P@ssw0rd`).
-
-Configure `src/main/resources/application.properties`, you can change database
-configuration according to your defined database.
-```txt
-spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
-spring.datasource.url=jdbc:mysql://localhost:3306/mysql
-spring.datasource.username=root
-spring.datasource.password=P@ssw0rd
-```
 
 * Compile code (install Maven first if not yet 
 install by `sudo apt-get install maven`)

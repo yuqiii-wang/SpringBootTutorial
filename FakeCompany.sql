@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS `fakecompany`;
 CREATE DATABASE `fakecompany`;
 
 USE `fakecompany`;
@@ -17,29 +18,30 @@ CREATE TABLE `product` (
 INSERT INTO `product`(`ProductId`, `Name`, `Manufacture_Location`, `Price`, `Cost`, `Currency`, `Description`) 
 VALUES ('CN1', 'iPhone12 Case (Navy Blue)', 'CN', 10, 5, 'RMB', NULL),
 ('CN2', 'iPhone12 Case (Navy Blue)', 'CN', 10, 5, 'RMB', NULL),
-('CN3', 'iPhone12 Case (Sky Blue)', 'CN', 12, 5, 'RMB', NULL);
+('CN3', 'iPhone12 Case (Sky Blue)', 'CN', 12, 5, 'RMB', NULL),
+('CN4', 'iPhone12 Case (Royal Red, Limited Edition)', 'CN', 500, 10, 'US Dollar', 'A custom iPhone case for a rich customer who read \'Limited\' then went crazy ignorant of the price');
 
-DROP TABLE IF EXISTS `customers`;
-CREATE TABLE `customers` (
+DROP TABLE IF EXISTS `customer`;
+CREATE TABLE `customer` (
   `CustomerID` varchar(5) NOT NULL,
-  `CompanyName` varchar(40) NOT NULL,
-  `ContactName` varchar(30) DEFAULT NULL,
-  `ContactTitle` varchar(30) DEFAULT NULL,
+  `Company_Name` varchar(40) NOT NULL,
+  `Contact_Name` varchar(30) DEFAULT NULL,
+  `Contact_Title` varchar(30) DEFAULT NULL,
   `Address` varchar(60) DEFAULT NULL,
   `City` varchar(15) DEFAULT NULL,
   `Region` varchar(15) DEFAULT NULL,
-  `PostalCode` varchar(10) DEFAULT NULL,
+  `Postal_Code` varchar(10) DEFAULT NULL,
   `Country` varchar(15) DEFAULT NULL,
   `Phone` varchar(24) DEFAULT NULL,
   `Fax` varchar(24) DEFAULT NULL,
   PRIMARY KEY (`CustomerID`),
   KEY `City` (`City`),
-  KEY `CompanyName` (`CompanyName`),
-  KEY `PostalCode` (`PostalCode`),
+  KEY `Company_Name` (`Company_Name`),
+  KEY `Postal_Code` (`Postal_Code`),
   KEY `Region` (`Region`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT  INTO `customers`(`CustomerID`,`CompanyName`,`ContactName`,`ContactTitle`,`Address`,`City`,`Region`,`PostalCode`,`Country`,`Phone`,`Fax`) values ('ALFKI','Alfreds Futterkiste','Maria Anders','Sales Representative','Obere Str. 57','Berlin',NULL,'12209','Germany','030-0074321','030-0076545'),
+INSERT  INTO `customer`(`CustomerID`,`Company_Name`,`Contact_Name`,`Contact_Title`,`Address`,`City`,`Region`,`Postal_Code`,`Country`,`Phone`,`Fax`) values ('ALFKI','Alfreds Futterkiste','Maria Anders','Sales Representative','Obere Str. 57','Berlin',NULL,'12209','Germany','030-0074321','030-0076545'),
 ('ANATR','Ana Trujillo Emparedados y helados','Ana Trujillo','Owner','Avda. de la Constitución 2222','México D.F.',NULL,'05021','Mexico','(5) 555-4729','(5) 555-3745'),
 ('ANTON','Antonio Moreno Taquería','Antonio Moreno','Owner','Mataderos  2312','México D.F.',NULL,'05023','Mexico','(5) 555-3932',NULL),
 ('AROUT','Around the Horn','Thomas Hardy','Sales Representative','120 Hanover Sq.','London',NULL,'WA1 1DP','UK','(171) 555-7788','(171) 555-6750'),
@@ -131,33 +133,33 @@ INSERT  INTO `customers`(`CustomerID`,`CompanyName`,`ContactName`,`ContactTitle`
 ('WOLZA','Wolski  Zajazd','Zbyszek Piestrzeniewicz','Owner','ul. Filtrowa 68','Warszawa',NULL,'01-012','Poland','(26) 642-7012','(26) 642-7012'),
 ('ZKRJ','中科软件有限公司','刘小姐','销售代表','大崇明路 50 号','北京','华北','343567','中国','(010)60074321','(010) 60765452)');
 
-DROP TABLE IF EXISTS `employees`;
-CREATE TABLE `employees` (
+DROP TABLE IF EXISTS `employee`;
+CREATE TABLE `employee` (
   `EmployeeID` int(11) NOT NULL AUTO_INCREMENT,
-  `LastName` varchar(20) NOT NULL,
-  `FirstName` varchar(10) NOT NULL,
+  `Last_Name` varchar(20) NOT NULL,
+  `First_Name` varchar(10) NOT NULL,
   `Title` varchar(30) DEFAULT NULL,
-  `TitleOfCourtesy` varchar(25) DEFAULT NULL,
-  `BirthDate` date DEFAULT NULL,
-  `HireDate` date DEFAULT NULL,
+  `Title_Of_Courtesy` varchar(25) DEFAULT NULL,
+  `Birth_Date` date DEFAULT NULL,
+  `Hire_Date` date DEFAULT NULL,
   `Address` varchar(60) DEFAULT NULL,
   `City` varchar(15) DEFAULT NULL,
   `Region` varchar(15) DEFAULT NULL,
-  `PostalCode` varchar(10) DEFAULT NULL,
+  `Postal_Code` varchar(10) DEFAULT NULL,
   `Country` varchar(15) DEFAULT NULL,
-  `HomePhone` varchar(24) DEFAULT NULL,
+  `Home_Phone` varchar(24) DEFAULT NULL,
   `Extension` varchar(4) DEFAULT NULL,
   `Notes` longtext,
-  `ReportsTo` int(11) DEFAULT NULL,
-  `PhotoPath` varchar(255) DEFAULT NULL,
+  `Reports_To` int(11) DEFAULT NULL,
+  `Photo_Path` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`EmployeeID`),
-  KEY `LastName` (`LastName`),
-  KEY `PostalCode` (`PostalCode`),
-  KEY `ReportsTo` (`ReportsTo`),
-  CONSTRAINT `FK_Employees_Employees` FOREIGN KEY (`ReportsTo`) REFERENCES `employees` (`EmployeeID`)
+  KEY `Last_Name` (`Last_Name`),
+  KEY `Postal_Code` (`Postal_Code`),
+  KEY `Reports_To` (`Reports_To`),
+  CONSTRAINT `FK_Employee_Employee` FOREIGN KEY (`Reports_To`) REFERENCES `employee` (`EmployeeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
-INSERT  INTO `employees`(`EmployeeID`,`LastName`,`FirstName`,`Title`,`TitleOfCourtesy`,`BirthDate`,`HireDate`,`Address`,`City`,`Region`,`PostalCode`,`Country`,`HomePhone`,`Extension`,`Notes`,`ReportsTo`,`PhotoPath`) VALUES (2,'Fuller','Andrew','Vice President, Sales','Dr.','1952-02-19','1992-08-14','908 W. Capital Way','Tacoma','WA','98401','USA','(206) 555-9482','3457','Andrew received his BTS commercial in 1974 and a Ph.D. in international marketing from the University of Dallas in 1981.  He is fluent in French and Italian and reads German.  He joined the company as a sales representative, was promoted to sales manager in January 1992 and to vice president of sales in March 1993.  Andrew is a member of the Sales Management Roundtable, the Seattle Chamber of Commerce, and the Pacific Rim Importers Association.',NULL,'http://accweb/emmployees/fuller.bmp'),
+INSERT  INTO `employee`(`EmployeeID`,`Last_Name`,`First_Name`,`Title`,`Title_Of_Courtesy`,`Birth_Date`,`Hire_Date`,`Address`,`City`,`Region`,`Postal_Code`,`Country`,`Home_Phone`,`Extension`,`Notes`,`Reports_To`,`Photo_Path`) VALUES (2,'Fuller','Andrew','Vice President, Sales','Dr.','1952-02-19','1992-08-14','908 W. Capital Way','Tacoma','WA','98401','USA','(206) 555-9482','3457','Andrew received his BTS commercial in 1974 and a Ph.D. in international marketing from the University of Dallas in 1981.  He is fluent in French and Italian and reads German.  He joined the company as a sales representative, was promoted to sales manager in January 1992 and to vice president of sales in March 1993.  Andrew is a member of the Sales Management Roundtable, the Seattle Chamber of Commerce, and the Pacific Rim Importers Association.',NULL,'http://accweb/emmployees/fuller.bmp'),
 (1,'Davolio','Nancy','Sales Representative','Ms.','1948-12-08','1992-05-01','507 - 20th Ave. E.\nApt. 2A','Seattle','WA','98122','USA','(206) 555-9857','5467','Education includes a BA in psychology from Colorado State University in 1970.  She also completed \"The Art of the Cold Call.\"  Nancy is a member of Toastmasters International.',2,'http://accweb/emmployees/davolio.bmp'),
 (3,'Leverling','Janet','Sales Representative','Ms.','1963-08-30','1992-04-01','722 Moss Bay Blvd.','Kirkland','WA','98033','USA','(206) 555-3412','3355','Janet has a BS degree in chemistry from Boston College (1984).  She has also completed a certificate program in food retailing management.  Janet was hired as a sales associate in 1991 and promoted to sales representative in February 1992.',2,'http://accweb/emmployees/leverling.bmp'),
 (4,'Peacock','Margaret','Sales Representative','Mrs.','1937-09-19','1993-05-03','4110 Old Redmond Rd.','Redmond','WA','98052','USA','(206) 555-8122','5176','Steven Buchanan graduated from St. Andrews University, Scotland, with a BSC degree in 1976.  Upon joining the company as a sales representative in 1992, he spent 6 months in an orientation program at the Seattle office and then returned to his permanent post in London.  He was promoted to sales manager in March 1993.  Mr. Buchanan has completed the courses \"Successful Telemarketing\" and \"International Sales Management.\"  He is fluent in French.',2,'http://accweb/emmployees/buchanan.bmp'),
